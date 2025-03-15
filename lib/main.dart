@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  _init() async {
+    debugPrint("\n\npausing...\n\n");
+    await Future.delayed(Duration(seconds: 3));
+    debugPrint("\n\nun_pausing...\n\n");
+    FlutterNativeSplash.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
